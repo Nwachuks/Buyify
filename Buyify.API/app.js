@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const config = require('./config/database');
+const cors = require('cors');
 
 // Connect to db
 mongoose.connect(config.database);
@@ -13,10 +14,17 @@ db.once('open', () => {
 // Init app
 const app = express();
 
-// Test server
-app.get('/', (req, res) => {
-    res.send('Working!');
-});
+// Enable cors
+app.use(cors({ origin: 'http://localhost:4200' }));
+
+// Set routes
+const adminPages = require('./routes/admin_pages');
+app.use('/admin/pages', adminPages);
+
+const pages = require('./routes/pages');
+app.use('/', pages);
+
+
 
 // Start server
 const port = 3000;
