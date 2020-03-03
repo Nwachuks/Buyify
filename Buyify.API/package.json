@@ -1,0 +1,22 @@
+{
+  "name": "buyify.api",
+  "version": "1.0.0",
+  "description": "Online Shopping Web App and Content Management System (CMS)",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nwachuks/Buyify.git"
+  },
+  "author": "Nwachukwu Ejiofor",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Nwachuks/Buyify/issues"
+  },
+  "homepage": "https://github.com/Nwachuks/Buyify#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
