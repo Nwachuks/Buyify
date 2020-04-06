@@ -5,12 +5,13 @@ import { environment } from './../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class AdminService {
   baseUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) { }
 
-  getPages() {
-    return this.http.get(this.baseUrl, { responseType: 'text' });
-  }
+  // addPage() {
+  //   return this.http.post(this.baseUrl + 'admin/pages/add-page')
+  // }
+
 }
