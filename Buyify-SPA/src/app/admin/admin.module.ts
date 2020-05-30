@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './admin.component';
+import { AdminHeaderComponent } from './../nav/admin/admin-header/admin-header.component';
+import { AdminFooterComponent } from '../nav/admin/admin-footer/admin-footer.component';
 import { AddPageComponent } from './add-page/add-page.component';
 
 const adminRoutes: Routes = [
@@ -13,6 +15,8 @@ const adminRoutes: Routes = [
 @NgModule({
   declarations: [
     AdminComponent,
+    AdminHeaderComponent,
+    AdminFooterComponent,
     AddPageComponent,
   ],
   imports: [
