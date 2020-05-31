@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Page } from './../../_models/page.model';
 import { AdminService } from './../../_services/admin.service';
 import { AlertifyService } from './../../_services/alertify.service';
@@ -13,7 +14,7 @@ export class AddPageComponent implements OnInit {
   model: any = {};
   page: Page;
 
-  constructor(private adminService: AdminService, private alertify: AlertifyService) { }
+  constructor(private adminService: AdminService, private alertify: AlertifyService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -35,10 +36,10 @@ export class AddPageComponent implements OnInit {
       this.adminService.postAddPage(this.page).subscribe(() => {
         this.alertify.success('Page added');
       }, (error) => {
-        console.log(error);
         this.alertify.warning(error.error.message);
       }, () => {
         form.reset();
+        this.router.navigate(['']);
       });
     }
   }

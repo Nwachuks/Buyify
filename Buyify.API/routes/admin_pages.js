@@ -7,7 +7,13 @@ const Page = require('../models/page');
 
 // Get localhost:3000/admin/pages
 router.get('/', (req, res) => {
-    res.send('Admin Area');
+    Page.find({}).sort({sorting: 1}).exec((err, pages) => {
+        if (!err) {
+            res.send(pages);
+        } else {
+            return console.log('Error in retrieving Pages: ' + JSON.stringify(err, undefined, 2));
+        }
+    })
 });
 
 // Get localhost:3000/admin/pages/add-page
@@ -52,14 +58,14 @@ router.post('/add-page', [
                     title: title,
                     slug: slug,
                     content: content,
-                    sorting: 0
+                    sorting: 100
                 });
 
                 page.save((err, doc) => {
                     if(!err) {
                         res.send(doc);
                     } else {
-                        return console.log('Error in Page save: ' + JSON.stringify(err, undefined, 2));
+                        return console.log('Error in saving Page: ' + JSON.stringify(err, undefined, 2));
                     }
                 });
             }
