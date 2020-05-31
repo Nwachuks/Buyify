@@ -6,11 +6,16 @@ import { AdminComponent } from './admin.component';
 import { AdminHeaderComponent } from './../nav/admin/admin-header/admin-header.component';
 import { AdminFooterComponent } from '../nav/admin/admin-footer/admin-footer.component';
 import { AddPageComponent } from './add-page/add-page.component';
+import { EditPageComponent } from './edit-page/edit-page.component';
+
 import { AlertifyService } from './../_services/alertify.service';
 
 const adminRoutes: Routes = [
   { path: '', component: AdminComponent },
-  { path: 'add-page', component: AddPageComponent }
+  { path: 'add-page', component: AddPageComponent },
+  { path: 'edit-page', component: EditPageComponent },
+  { path: 'pages', redirectTo: '', pathMatch: 'full' },
+  { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
 
 @NgModule({
@@ -19,6 +24,7 @@ const adminRoutes: Routes = [
     AdminHeaderComponent,
     AdminFooterComponent,
     AddPageComponent,
+    EditPageComponent
   ],
   imports: [
     CommonModule,

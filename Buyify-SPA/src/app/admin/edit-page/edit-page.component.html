@@ -1,0 +1,33 @@
+<app-admin-header></app-admin-header>
+
+<br>
+
+<div class="container">
+  <h2 class="page-title">Edit page</h2>
+  <a href="#" class="btn btn-primary">Back to all pages</a>
+  <br><br>
+
+  <form #editPageForm="ngForm" (ngSubmit)="editPage(editPageForm)" novalidate autocomplete="off">
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="text" class="form-control" placeholder="Title of Page" name="title" [(ngModel)]="page.title" #title="ngModel" required>
+      <!-- <div [hidden]="title.valid || title.pristine" class="alert alert-danger">Page title is required</div> -->
+    </div>
+
+    <div class="form-group">
+      <label for="slug">Slug</label>
+      <input type="text" class="form-control" placeholder="Slug" name="slug" [(ngModel)]="page.slug">
+    </div>
+
+    <div class="form-group">
+      <label for="content">Content</label>
+      <textarea class="form-control" cols="30" rows="5" placeholder="Content of Page" name="content"
+        [(ngModel)]="page.content" #content="ngModel" required></textarea>
+      <!-- <div [hidden]="content.valid || content.pristine" class="alert alert-danger">Content description is required</div> -->
+    </div>
+
+    <button type="submit" class="btn btn-success">Submit</button>
+  </form>
+</div>
+
+<app-admin-footer></app-admin-footer>
