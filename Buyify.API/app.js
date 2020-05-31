@@ -41,8 +41,6 @@ app.use('/admin/pages', adminPages);
 const pages = require('./routes/pages');
 app.use('/', pages);
 
-
-
 // Start server
 const port = 3000;
 

@@ -1,3 +1,5 @@
+<app-admin-header></app-admin-header>
+
 <br>
 
 <div class="container">
@@ -5,22 +7,27 @@
   <a href="#" class="btn btn-primary">Back to all pages</a>
   <br><br>
 
-  <form #addPageForm="ngForm" (ngSubmit)="addPage(addPageForm.value)" novalidate autocomplete="off">
+  <form #addPageForm="ngForm" (ngSubmit)="addPage(addPageForm)" novalidate autocomplete="off">
     <div class="form-group">
       <label for="title">Title</label>
-      <input type="text" class="form-control" name="title" value="{{title}}" placeholder="Title of Page">
+      <input type="text" class="form-control" placeholder="Title of Page" name="title" [(ngModel)]="model.title" #title="ngModel" required>
+      <div [hidden]="title.valid || title.pristine" class="alert alert-danger">Page title is required</div>
     </div>
 
     <div class="form-group">
       <label for="slug">Slug</label>
-      <input type="text" class="form-control" name="slug" value="{{slug}}" placeholder="Slug">
+      <input type="text" class="form-control" placeholder="Slug" name="slug" [(ngModel)]="model.slug">
     </div>
 
     <div class="form-group">
       <label for="content">Content</label>
-      <textarea name="content" class="form-control" cols="30" rows="5" placeholder="Content of Page">{{content}}</textarea>
+      <textarea class="form-control" cols="30" rows="5" placeholder="Content of Page" name="content"
+        [(ngModel)]="model.content" #content="ngModel" required></textarea>
+      <div [hidden]="content.valid || content.pristine" class="alert alert-danger">Content description is required</div>
     </div>
 
     <button type="submit" class="btn btn-success">Submit</button>
   </form>
 </div>
+
+<app-admin-footer></app-admin-footer>

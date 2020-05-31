@@ -7,16 +7,14 @@ const PageSchema = mongoose.Schema({
         required: true
     },
     slug: {
-        type: String,
-        required: true
+        type: String
     },
     content: {
         type: String,
         required: true
     },
     sorting: {
-        type: String,
-        required: true
+        type: Number
     }
 })
 

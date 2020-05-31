@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Page } from './../../_models/page.model';
+import { AdminService } from './../../_services/admin.service';
+import { AlertifyService } from './../../_services/alertify.service';
 
 @Component({
   selector: 'app-add-page',
@@ -6,17 +10,37 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-page.component.css']
 })
 export class AddPageComponent implements OnInit {
-  title: string;
-  slug: string;
-  content: string;
+  model: any = {};
+  page: Page;
 
-  constructor() { }
+  constructor(private adminService: AdminService, private alertify: AlertifyService) { }
 
   ngOnInit() {
   }
 
-  addPage(formValues) {
-
+  addPage(form: NgForm) {
+    if (form.valid) {
+      // Clone form object to page model
+      this.page = Object.assign({}, form.value);
+      // if (this.page.title === undefined) {
+      //   this.page.title = '';
+      // }
+      // if (this.page.content === undefined) {
+      //   this.page.content = '';
+      // }
+      // if (this.page.slug === undefined) {
+      //   this.page.slug = '';
+      // }
+      console.log(this.page);
+      this.adminService.postAddPage(this.page).subscribe(() => {
+        this.alertify.success('Page added');
+      }, (error) => {
+        console.log(error);
+        this.alertify.warning(error.error.message);
+      }, () => {
+        form.reset();
+      });
+    }
   }
 
 }

@@ -10,8 +10,9 @@ export class AdminService {
 
   constructor(private http: HttpClient) { }
 
-  // addPage() {
-  //   return this.http.post(this.baseUrl + 'admin/pages/add-page')
-  // }
+  postAddPage(page) {
+    return this.http.post(this.baseUrl + 'admin/pages/add-page', page);
+
+  }
 
 }

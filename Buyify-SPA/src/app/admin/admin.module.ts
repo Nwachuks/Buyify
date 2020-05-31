@@ -6,6 +6,7 @@ import { AdminComponent } from './admin.component';
 import { AdminHeaderComponent } from './../nav/admin/admin-header/admin-header.component';
 import { AdminFooterComponent } from '../nav/admin/admin-footer/admin-footer.component';
 import { AddPageComponent } from './add-page/add-page.component';
+import { AlertifyService } from './../_services/alertify.service';
 
 const adminRoutes: Routes = [
   { path: '', component: AdminComponent },
@@ -23,6 +24,9 @@ const adminRoutes: Routes = [
     CommonModule,
     FormsModule,
     RouterModule.forChild(adminRoutes)
+  ],
+  providers: [
+    AlertifyService
   ],
   exports: [
     AdminComponent

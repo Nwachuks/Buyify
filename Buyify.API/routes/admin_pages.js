@@ -11,40 +11,59 @@ router.get('/', (req, res) => {
 });
 
 // Get localhost:3000/admin/pages/add-page
-router.get('/add-page', (req, res) => {
-    let title = "";
-    let slug = "";
-    let content = "";
-
-    const page = new Page({
-        title: title,
-        slug: slug,
-        content: content
-    });
-});
+// router.get('/add-page', (req, res) => {
+//     const page = new Page({
+//         title: title,
+//         slug: slug,
+//         content: content
+//     });
+// });
 
 // Post localhost:3000/admin/pages/add-page
 router.post('/add-page', [
     check('title', 'Title is required').not().isEmpty(),
     check('content', 'Content must not be empty').not().isEmpty()
 ], (req, res) => {
-    let title = req.body.title;
-    let slug = req.body.slug.replace(/\s+/g, '-').toLowerCase();
-    if (slug == ""){
+    title = req.body.title;
+    if (req.body.slug == null) {
         slug = title.replace(/\s+/g, '-').toLowerCase();
+    } else {
+        slug = req.body.slug.replace(/\s+/g, '-').toLowerCase();
     }
-    let content = req.body.content;
+    content = req.body.content;
     
     const errors = validationResult(req);
 
     if(!errors.isEmpty()){
+        // Validation errors already handled on front end
         console.log(errors);
-        // res.render('admin/add_page', {
-        //     errors: errors.array(),
-        //     title: title,
-        //     slug: slug,
-        //     content: content
-        // });
+        return res.status(400).send({
+            message: errors.errors[0].msg
+        });
+    } else {
+        // Check if slug is unique
+        Page.findOne({slug: slug}, (err, page) => {
+            if (page) {
+                return res.status(400).send({
+                    message: 'Page slug exists choose another.'
+                });
+            } else {
+                const page = new Page({
+                    title: title,
+                    slug: slug,
+                    content: content,
+                    sorting: 0
+                });
+
+                page.save((err, doc) => {
+                    if(!err) {
+                        res.send(doc);
+                    } else {
+                        return console.log('Error in Page save: ' + JSON.stringify(err, undefined, 2));
+                    }
+                });
+            }
+        });
     }
 });
 

@@ -10,27 +10,31 @@ import { UserFooterComponent } from './nav/user/user-footer/user-footer.componen
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 
+import { AdminService } from './_services/admin.service';
 import { UserService } from './_services/user.service';
+import { AlertifyService } from './_services/alertify.service';
 
 @NgModule({
    declarations: [
-      AppComponent,
-      UserHeaderComponent,
-      UserFooterComponent,
-      HomeComponent,
-      LoginComponent
+    AppComponent,
+    UserHeaderComponent,
+    UserFooterComponent,
+    HomeComponent,
+    LoginComponent
    ],
    imports: [
-      BrowserModule,
-      AppRoutingModule,
-      HttpClientModule,
-      FormsModule
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule
    ],
    providers: [
-      UserService
+    AdminService,
+    UserService,
+    AlertifyService
    ],
    bootstrap: [
-      AppComponent
+    AppComponent
    ]
 })
 export class AppModule { }
