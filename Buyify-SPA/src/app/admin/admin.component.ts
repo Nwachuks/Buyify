@@ -39,7 +39,7 @@ export class AdminComponent implements OnInit {
 
   getPage(page: Page) {
     this.adminService.getPage(page);
-    this.router.navigate(['/edit-page']);
+    this.router.navigate(['/admin/pages/edit-page']);
   }
 
 }
