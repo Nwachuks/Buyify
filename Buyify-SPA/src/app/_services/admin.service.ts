@@ -8,7 +8,7 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class AdminService {
-  baseUrl = environment.apiUrl + 'admin/pages/';
+  baseUrl = environment.adminApiUrl + 'pages/';
 
   private pageSource = new BehaviorSubject<Page>({
     _id: 'id',

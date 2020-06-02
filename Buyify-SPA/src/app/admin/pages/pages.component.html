@@ -1,0 +1,32 @@
+<app-admin-header></app-admin-header>
+
+<br>
+
+<div class="container">
+  <h2 class="page-title">All pages</h2>
+  <a routerLink="./add-page" class="btn btn-primary">Add a new page</a>
+  <br><br>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let page of pages">
+        <td>{{ page.title }}</td>
+        <td class="btn btn-primary" (click)="getPage(page)">Edit</td>
+        <td *ngIf="page.slug == 'home'"></td>
+        <td *ngIf="page.slug != 'home'" class="btn btn-danger float-lg-right" (click)="deletePage(page)">Delete</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<router-outlet></router-outlet>
+
+<app-admin-footer></app-admin-footer>

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Page } from 'src/app/_models/page.model';
-import { AdminService } from './../../_services/admin.service';
-import { AlertifyService } from './../../_services/alertify.service';
+import { AdminService } from '../../../_services/admin.service';
+import { AlertifyService } from '../../../_services/alertify.service';
 
 @Component({
   selector: 'app-edit-page',

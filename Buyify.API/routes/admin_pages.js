@@ -3,28 +3,19 @@ const router = express.Router();
 const ObjectId = require('mongoose').Types.ObjectId;
 const { check, validationResult } = require('express-validator');
 
-// Get page model
+// Get Page model
 const Page = require('../models/page');
 
 // Get localhost:3000/admin/pages
 router.get('/', (req, res) => {
-    Page.find({}).sort({sorting: 1}).exec((err, pages) => {
+    Page.find().sort({sorting: 1}).exec((err, pages) => {
         if (!err) {
             res.send(pages);
         } else {
             return console.log('Error in retrieving Pages: ' + JSON.stringify(err, undefined, 2));
         }
-    })
+    });
 });
-
-// Get localhost:3000/admin/pages/add-page
-// router.get('/add-page', (req, res) => {
-//     const page = new Page({
-//         title: title,
-//         slug: slug,
-//         content: content
-//     });
-// });
 
 // Post localhost:3000/admin/pages/add-page
 router.post('/add-page', [
@@ -73,17 +64,6 @@ router.post('/add-page', [
         });
     }
 });
-
-// Get localhost:3000/admin/pages/edit-page
-// router.get('/edit-page/:slug', (req, res) => {
-//     Page.findOne({slug: req.params.slug}, (err, page) => {
-//         if (!err) {
-//             res.send(page);
-//         } else {
-//             return console.log('Error in retrieving Page to edit: ' + JSON.stringify(err, undefined, 2));
-//         }
-//     });
-// });
 
 // Post localhost:3000/admin/pages/edit-page
 router.post('/edit-page', [
@@ -151,7 +131,7 @@ router.delete('/:_id', (req, res) => {
         } else {
             return console.log('Error in deleting Page: ' + JSON.stringify(err, undefined, 2));
         }
-    })
+    });
 });
 
 module.exports = router;

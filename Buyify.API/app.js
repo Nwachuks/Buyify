@@ -38,6 +38,9 @@ app.use(session({
 const adminPages = require('./routes/admin_pages');
 app.use('/admin/pages', adminPages);
 
+const adminCategories = require('./routes/admin_categories');
+app.use('/admin/categories', adminCategories);
+
 const pages = require('./routes/pages');
 app.use('/', pages);
 

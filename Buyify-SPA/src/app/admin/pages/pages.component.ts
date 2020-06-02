@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Page } from '../_models/page.model';
-import { AdminService } from './../_services/admin.service';
-import { AlertifyService } from './../_services/alertify.service';
+import { Page } from '../../_models/page.model';
+import { AdminService } from '../../_services/admin.service';
+import { AlertifyService } from '../../_services/alertify.service';
 
 @Component({
-  selector: 'app-admin',
-  templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.css']
+  selector: 'app-admin-pages',
+  templateUrl: './pages.component.html',
+  styleUrls: ['./pages.component.css']
 })
-export class AdminComponent implements OnInit {
+export class PagesComponent implements OnInit {
   page: Page;
   pages: Page[];
 
