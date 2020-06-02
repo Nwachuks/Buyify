@@ -10,7 +10,9 @@
   <form #editPageForm="ngForm" (ngSubmit)="editPage(editPageForm)" novalidate autocomplete="off">
     <div class="form-group">
       <label for="title">Title</label>
-      <input type="text" class="form-control" placeholder="Title of Page" name="title" [(ngModel)]="page.title" #title="ngModel" required>
+      <input type="text" class="form-control" placeholder="Title of Page" name="title" [(ngModel)]="page.title"
+        #title="ngModel" required>
+        <!-- Error div -->
       <div [hidden]="title.valid || title.pristine" class="alert alert-danger">Page title is required</div>
     </div>
 
@@ -23,9 +25,11 @@
       <label for="content">Content</label>
       <textarea class="form-control" cols="30" rows="5" placeholder="Content of Page" name="content"
         [(ngModel)]="page.content" #content="ngModel" required></textarea>
+        <!-- Error div -->
       <div [hidden]="content.valid || content.pristine" class="alert alert-danger">Content description is required</div>
     </div>
 
+    <input type="hidden" [(ngModel)]="page._id">
     <button type="submit" class="btn btn-success">Submit</button>
   </form>
 </div>

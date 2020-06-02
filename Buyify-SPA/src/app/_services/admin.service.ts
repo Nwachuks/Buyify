@@ -8,7 +8,7 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class AdminService {
-  baseUrl = environment.apiUrl;
+  baseUrl = environment.apiUrl + 'admin/pages/';
 
   private pageSource = new BehaviorSubject<Page>({
     _id: 'id',
@@ -21,7 +21,7 @@ export class AdminService {
   constructor(private http: HttpClient) { }
 
   getAllPages() {
-    return this.http.get(this.baseUrl + 'admin/pages');
+    return this.http.get(this.baseUrl);
   }
 
   // getPage(page: Page) {
@@ -33,7 +33,11 @@ export class AdminService {
   }
 
   postAddPage(page) {
-    return this.http.post(this.baseUrl + 'admin/pages/add-page', page);
+    return this.http.post(this.baseUrl + 'add-page', page);
+  }
+
+  postEditPage(page) {
+    return this.http.post(this.baseUrl + 'edit-page', page);
   }
 
 }

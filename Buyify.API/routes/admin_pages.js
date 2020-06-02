@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const ObjectId = require('mongoose').Types.ObjectId;
 const { check, validationResult } = require('express-validator');
 
 // Get page model
@@ -31,7 +32,7 @@ router.post('/add-page', [
     check('content', 'Content must not be empty').not().isEmpty()
 ], (req, res) => {
     title = req.body.title;
-    if (req.body.slug == null) {
+    if (req.body.slug == null || req.body.slug == "") {
         slug = title.replace(/\s+/g, '-').toLowerCase();
     } else {
         slug = req.body.slug.replace(/\s+/g, '-').toLowerCase();
@@ -51,7 +52,7 @@ router.post('/add-page', [
         Page.findOne({slug: slug}, (err, page) => {
             if (page) {
                 return res.status(400).send({
-                    message: 'Page slug exists choose another.'
+                    message: 'Page slug exists, please choose another.'
                 });
             } else {
                 const page = new Page({
@@ -74,14 +75,72 @@ router.post('/add-page', [
 });
 
 // Get localhost:3000/admin/pages/edit-page
-router.get('/edit-page/:slug', (req, res) => {
-    Page.findOne({slug: req.params.slug}, (err, page) => {
-        if (!err) {
-            res.send(page);
-        } else {
-            return console.log('Error in retrieving Page to edit: ' + JSON.stringify(err, undefined, 2));
-        }
-    });
+// router.get('/edit-page/:slug', (req, res) => {
+//     Page.findOne({slug: req.params.slug}, (err, page) => {
+//         if (!err) {
+//             res.send(page);
+//         } else {
+//             return console.log('Error in retrieving Page to edit: ' + JSON.stringify(err, undefined, 2));
+//         }
+//     });
+// });
+
+// Post localhost:3000/admin/pages/edit-page
+router.post('/edit-page', [
+    check('title', 'Title is required').not().isEmpty(),
+    check('content', 'Content must not be empty').not().isEmpty()
+], (req, res) => {
+    if (!ObjectId.isValid(req.body._id)) {
+        return res.status(400).send({
+            message: 'No record of this page: ${ req.body._id }',
+        });
+    }
+
+    title = req.body.title;
+    if (req.body.slug == null || req.body.slug == "") {
+        slug = title.replace(/\s+/g, '-').toLowerCase();
+    } else {
+        slug = req.body.slug.replace(/\s+/g, '-').toLowerCase();
+    }
+    content = req.body.content;
+    id = req.body._id;
+    
+    const errors = validationResult(req);
+
+    if(!errors.isEmpty()){
+        // Validation errors already handled on front end
+        console.log(errors);
+        return res.status(400).send({
+            message: errors.errors[0].msg
+        });
+    } else {
+        // Check if slug is unique not including existing slug
+        Page.findOne({slug: slug, _id: { '$ne': id }}, (err, page) => {
+            if (err) {
+                return console.log('Error in saving Page: ' + JSON.stringify(err, undefined, 2));
+            }
+            if (page) {
+                return res.status(400).send({
+                    message: 'Page slug exists, please choose another.'
+                });
+            } else {
+                const page = {
+                    title: title,
+                    slug: slug,
+                    content: content,   
+                    sorting: 100
+                };
+
+                Page.findByIdAndUpdate(id, { $set: page }, { new: true }, (err, page) => {
+                    if(!err) {
+                        res.send(page);
+                    } else {
+                        return console.log('Error in updating Page: ' + JSON.stringify(err, undefined, 2));
+                    }
+                });
+            }
+        });
+    }
 });
 
 module.exports = router;
