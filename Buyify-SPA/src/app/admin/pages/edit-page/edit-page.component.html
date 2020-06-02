@@ -23,8 +23,8 @@
 
     <div class="form-group">
       <label for="content">Content</label>
-      <textarea class="form-control" cols="30" rows="5" placeholder="Content of Page" name="content"
-        [(ngModel)]="page.content" #content="ngModel" required></textarea>
+      <textarea class="form-control" cols="30" rows="5" placeholder="Content of Page" [(ngModel)]="page.content"
+        name="content" #content="ngModel" required></textarea>
         <!-- Error div -->
       <div [hidden]="content.valid || content.pristine" class="alert alert-danger">Content description is required</div>
     </div>

@@ -3,24 +3,23 @@
 <br>
 
 <div class="container">
-  <h2 class="page-title">All categories</h2>
-  <a routerLink="./add-page" class="btn btn-primary">Add a new category</a>
+  <h2 class="page-title">Categories</h2>
+  <a routerLink="./add-category" class="btn btn-primary">Add a new category</a>
   <br><br>
 
-  <table class="table">
+  <table class="table table-striped">
     <thead>
       <tr>
-        <th>Title</th>
+        <th>Category</th>
         <th>Edit</th>
         <th>Delete</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let page of pages">
-        <td>{{ page.title }}</td>
-        <td class="btn btn-primary" (click)="getPage(page)">Edit</td>
-        <td *ngIf="page.slug == 'home'"></td>
-        <td *ngIf="page.slug != 'home'" class="btn btn-danger float-lg-right" (click)="deletePage(page)">Delete</td>
+      <tr *ngFor="let category of categories">
+        <td>{{ category.title }}</td>
+        <!-- <td class="btn btn-primary" (click)="getCategory(category)">Edit</td>
+        <td class="btn btn-danger float-lg-right" (click)="deleteCategory(category)">Delete</td> -->
       </tr>
     </tbody>
   </table>
@@ -30,6 +29,3 @@
 <router-outlet></router-outlet>
 
 <app-admin-footer></app-admin-footer>
-<p>
-  categories works!
-</p>
