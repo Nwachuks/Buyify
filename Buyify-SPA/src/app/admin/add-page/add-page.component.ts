@@ -32,14 +32,14 @@ export class AddPageComponent implements OnInit {
       // if (this.page.slug === undefined) {
       //   this.page.slug = '';
       // }
-      console.log(this.page);
+      // console.log(this.page);
       this.adminService.postAddPage(this.page).subscribe(() => {
         this.alertify.success('Page added');
       }, (error) => {
         this.alertify.warning(error.error.message);
       }, () => {
         form.reset();
-        this.router.navigate(['']);
+        this.router.navigate(['/admin/pages']);
       });
     }
   }

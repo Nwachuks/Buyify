@@ -143,4 +143,15 @@ router.post('/edit-page', [
     }
 });
 
+// Get localhost:3000/admin/pages
+router.delete('/:_id', (req, res) => {
+    Page.findByIdAndRemove(req.params._id, (err, page) => {
+        if (!err) {
+            res.send(page);
+        } else {
+            return console.log('Error in deleting Page: ' + JSON.stringify(err, undefined, 2));
+        }
+    })
+});
+
 module.exports = router;

@@ -28,18 +28,22 @@ export class AdminComponent implements OnInit {
     });
   }
 
-  // getPage(page: Page) {
-  //   this.adminService.getPage(page).subscribe((res) => {
-  //     console.log(res as Page);
-  //   }, (error) => {
-  //     this.alertify.error(error);
-  //     console.log(error);
-  //   });
-  // }
-
   getPage(page: Page) {
     this.adminService.getPage(page);
     this.router.navigate(['/admin/pages/edit-page']);
+  }
+
+  deletePage(page: Page) {
+    if (confirm('Do you want to delete this page?')) {
+      this.adminService.deletePage(page).subscribe((res) => {
+        // console.log(res);
+        this.alertify.success('Page deleted');
+      }, (error) => {
+        this.alertify.warning(error.error.msg);
+      }, () => {
+        this.getPages();
+      });
+    }
   }
 
 }

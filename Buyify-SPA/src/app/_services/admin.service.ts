@@ -24,10 +24,6 @@ export class AdminService {
     return this.http.get(this.baseUrl);
   }
 
-  // getPage(page: Page) {
-  //   return this.http.get(this.baseUrl + 'admin/pages/edit-page/' + page.slug);
-  // }
-
   getPage(page: Page) {
     this.pageSource.next(page);
   }
@@ -38,6 +34,10 @@ export class AdminService {
 
   postEditPage(page) {
     return this.http.post(this.baseUrl + 'edit-page', page);
+  }
+
+  deletePage(page) {
+    return this.http.delete(this.baseUrl + page._id);
   }
 
 }

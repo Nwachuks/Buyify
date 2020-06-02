@@ -20,7 +20,7 @@
         <td>{{ page.title }}</td>
         <td class="btn btn-primary" (click)="getPage(page)">Edit</td>
         <td *ngIf="page.slug == 'home'"></td>
-        <td *ngIf="page.slug != 'home'" class="btn btn-danger float-lg-right">Delete</td>
+        <td *ngIf="page.slug != 'home'" class="btn btn-danger float-lg-right" (click)="deletePage(page)">Delete</td>
       </tr>
     </tbody>
   </table>
