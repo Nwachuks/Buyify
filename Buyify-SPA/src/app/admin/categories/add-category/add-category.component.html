@@ -10,6 +10,6 @@
       <div [hidden]="title.valid || title.pristine" class="alert alert-danger">Category title is required</div>
     </div>
 
-    <button type="submit" class="btn btn-success">Submit</button>
+    <button type="submit" class="btn btn-success" [disabled]="addCategoryForm.invalid">Submit</button>
   </form>
 </div>

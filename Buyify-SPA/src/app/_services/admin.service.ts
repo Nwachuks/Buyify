@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from './../../environments/environment';
 import { Page } from '../_models/page.model';
 import { BehaviorSubject } from 'rxjs';
+import { Category } from '../_models/category.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,18 +20,25 @@ export class AdminService {
   });
   currentPage = this.pageSource.asObservable();
 
+  private categorySource = new BehaviorSubject<Category>({
+    _id: 'id',
+    title: 'title',
+    slug: 'slug'
+  });
+  currentCategory = this.categorySource.asObservable();
+
   constructor(private http: HttpClient) { }
 
   getAllPages() {
     return this.http.get(this.pageBaseUrl);
   }
 
-  getPage(page: Page) {
-    this.pageSource.next(page);
-  }
-
   postAddPage(page) {
     return this.http.post(this.pageBaseUrl + 'add-page', page);
+  }
+
+  getPage(page: Page) {
+    this.pageSource.next(page);
   }
 
   postEditPage(page) {
@@ -47,6 +55,14 @@ export class AdminService {
 
   postAddCategory(category) {
     return this.http.post(this.categoryBaseUrl + 'add-category', category);
+  }
+
+  postEditCategory(category) {
+    return this.http.post(this.categoryBaseUrl + 'edit-category', category);
+  }
+
+  getCategory(category) {
+    this.categorySource.next(category);
   }
 
 }

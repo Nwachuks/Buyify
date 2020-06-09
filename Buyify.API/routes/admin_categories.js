@@ -56,4 +56,54 @@ router.post('/add-category', [
 
 });
 
+// Post localhost:3000/admin/pages/edit-page
+router.post('/edit-category', [
+    check('title', 'Title is required').not().isEmpty()
+], (req, res) => {
+    if (!ObjectId.isValid(req.body._id)) {
+        return res.status(400).send({
+            message: 'No record of this category: ${ req.body._id }',
+        });
+    }
+
+    title = req.body.title;
+    slug = title.replace(/\s+/g, '-').toLowerCase();
+    id = req.body._id;
+    
+    const errors = validationResult(req);
+
+    if(!errors.isEmpty()){
+        // Validation errors already handled on front end
+        console.log(errors);
+        return res.status(400).send({
+            message: errors.errors[0].msg
+        });
+    } else {
+        // Check if slug is unique not including existing slug
+        Category.findOne({slug: slug, _id: { '$ne': id }}, (err, category) => {
+            if (err) {
+                return console.log('Error in saving Category: ' + JSON.stringify(err, undefined, 2));
+            }
+            if (category) {
+                return res.status(400).send({
+                    message: 'Category slug exists, please choose another.'
+                });
+            } else {
+                const category = {
+                    title: title,
+                    slug: slug
+                };
+
+                Category.findByIdAndUpdate(id, { $set: category }, { new: true }, (err, category) => {
+                    if(!err) {
+                        res.send(category);
+                    } else {
+                        return console.log('Error in updating Page: ' + JSON.stringify(err, undefined, 2));
+                    }
+                });
+            }
+        });
+    }
+});
+
 module.exports = router;

@@ -22,6 +22,6 @@
       <div [hidden]="content.valid || content.pristine" class="alert alert-danger">Content description is required</div>
     </div>
 
-    <button type="submit" class="btn btn-success">Submit</button>
+    <button type="submit" class="btn btn-success" [disabled]="addPageForm.invalid">Submit</button>
   </form>
 </div>
