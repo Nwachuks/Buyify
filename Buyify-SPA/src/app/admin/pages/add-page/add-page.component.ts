@@ -36,7 +36,7 @@ export class AddPageComponent implements OnInit {
       this.adminService.postAddPage(this.page).subscribe(() => {
         this.alertify.success('Page added');
       }, (error) => {
-        this.alertify.warning(error.error.message);
+        this.alertify.error(error.error.message);
       }, () => {
         form.reset();
         this.router.navigate(['/admin/pages']);

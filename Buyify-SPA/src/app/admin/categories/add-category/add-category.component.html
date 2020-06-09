@@ -1,3 +1,15 @@
-<p>
-  add-category works!
-</p>
+<div class="container">
+  <h2 class="category-title">Add a category</h2>
+  <a [routerLink]="['/admin/categories']" class="btn btn-primary">Back to all categories</a>
+  <br><br>
+
+  <form #addCategoryForm="ngForm" (ngSubmit)="addCategory(addCategoryForm)" novalidate autocomplete="off">
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="text" class="form-control" placeholder="Title of Category" name="title" [(ngModel)]="model.title" #title="ngModel" required>
+      <div [hidden]="title.valid || title.pristine" class="alert alert-danger">Category title is required</div>
+    </div>
+
+    <button type="submit" class="btn btn-success">Submit</button>
+  </form>
+</div>

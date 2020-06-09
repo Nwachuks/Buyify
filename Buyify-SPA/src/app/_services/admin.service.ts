@@ -45,4 +45,8 @@ export class AdminService {
     return this.http.get(this.categoryBaseUrl);
   }
 
+  postAddCategory(category) {
+    return this.http.post(this.categoryBaseUrl + 'add-category', category);
+  }
+
 }
