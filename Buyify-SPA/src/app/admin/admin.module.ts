@@ -2,18 +2,20 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
-import { AdminHeaderComponent } from './../nav/admin/admin-header/admin-header.component';
-import { AdminFooterComponent } from '../nav/admin/admin-footer/admin-footer.component';
+import { AdminComponent } from './admin.component';
+import { AdminHeaderComponent } from '../nav/admin-header/admin-header.component';
+import { FooterComponent } from '../nav/footer/footer.component';
 import { PagesComponent } from './pages/pages.component';
 import { AddPageComponent } from './pages/add-page/add-page.component';
 import { EditPageComponent } from './pages/edit-page/edit-page.component';
-import { CategoriesComponent } from './categories/categories/categories.component';
+import { CategoriesComponent } from './categories/categories.component';
 
 import { AlertifyService } from './../_services/alertify.service';
 
 const adminRoutes: Routes = [
-  { path: '', redirectTo: 'pages', pathMatch: 'full' },
-  { path: 'pages', component: PagesComponent },
+  // { path: '', redirectTo: 'pages', pathMatch: 'full' },
+  { path: '', component: AdminComponent },
+  { path: 'pages', component: PagesComponent, },
   { path: 'pages/add-page', component: AddPageComponent },
   { path: 'pages/edit-page', component: EditPageComponent },
   { path: 'categories', component: CategoriesComponent},
@@ -22,8 +24,9 @@ const adminRoutes: Routes = [
 
 @NgModule({
   declarations: [
+    AdminComponent,
     AdminHeaderComponent,
-    AdminFooterComponent,
+    FooterComponent,
     PagesComponent,
     AddPageComponent,
     EditPageComponent,
@@ -38,7 +41,8 @@ const adminRoutes: Routes = [
     AlertifyService
   ],
   exports: [
-    PagesComponent
+    AdminComponent,
+    RouterModule
   ]
 })
 export class AdminModule { }

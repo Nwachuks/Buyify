@@ -1,4 +1,4 @@
-import { AlertifyService } from './../../../_services/alertify.service';
+import { AlertifyService } from '../../_services/alertify.service';
 import { Component, OnInit } from '@angular/core';
 import { Category } from 'src/app/_models/category.model';
 import { AdminService } from 'src/app/_services/admin.service';

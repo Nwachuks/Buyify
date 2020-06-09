@@ -1,4 +1,4 @@
-<app-admin-header></app-admin-header>
+<!-- <app-admin-header></app-admin-header> -->
 
 <br>
 
@@ -10,7 +10,7 @@
   <form #editPageForm="ngForm" (ngSubmit)="editPage(editPageForm)" novalidate autocomplete="off">
     <div class="form-group">
       <label for="title">Title</label>
-      <input type="text" class="form-control" placeholder="Title of Page" name="title" [(ngModel)]="page.title"
+      <input type="text" class="form-control" placeholder="Title of Page" [(ngModel)]="page.title" name="title"
         #title="ngModel" required>
         <!-- Error div -->
       <div [hidden]="title.valid || title.pristine" class="alert alert-danger">Page title is required</div>
@@ -18,7 +18,7 @@
 
     <div class="form-group">
       <label for="slug">Slug</label>
-      <input type="text" class="form-control" placeholder="Slug" name="slug" [(ngModel)]="page.slug">
+      <input type="text" class="form-control" placeholder="Slug" [(ngModel)]="page.slug" name="slug">
     </div>
 
     <div class="form-group">
@@ -29,9 +29,9 @@
       <div [hidden]="content.valid || content.pristine" class="alert alert-danger">Content description is required</div>
     </div>
 
-    <input type="hidden" [(ngModel)]="page._id">
+    <input type="hidden" [(ngModel)]="page._id" name="_id">
     <button type="submit" class="btn btn-success">Submit</button>
   </form>
 </div>
 
-<app-admin-footer></app-admin-footer>
+<!-- <app-admin-footer></app-admin-footer> -->

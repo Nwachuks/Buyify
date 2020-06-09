@@ -8,7 +8,8 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class AdminService {
-  baseUrl = environment.adminApiUrl + 'pages/';
+  pageBaseUrl = environment.adminApiUrl + 'pages/';
+  categoryBaseUrl = environment.adminApiUrl + 'categories/';
 
   private pageSource = new BehaviorSubject<Page>({
     _id: 'id',
@@ -21,7 +22,7 @@ export class AdminService {
   constructor(private http: HttpClient) { }
 
   getAllPages() {
-    return this.http.get(this.baseUrl);
+    return this.http.get(this.pageBaseUrl);
   }
 
   getPage(page: Page) {
@@ -29,15 +30,19 @@ export class AdminService {
   }
 
   postAddPage(page) {
-    return this.http.post(this.baseUrl + 'add-page', page);
+    return this.http.post(this.pageBaseUrl + 'add-page', page);
   }
 
   postEditPage(page) {
-    return this.http.post(this.baseUrl + 'edit-page', page);
+    return this.http.post(this.pageBaseUrl + 'edit-page', page);
   }
 
   deletePage(page) {
-    return this.http.delete(this.baseUrl + page._id);
+    return this.http.delete(this.pageBaseUrl + page._id);
+  }
+
+  getAllCategories() {
+    return this.http.get(this.categoryBaseUrl);
   }
 
 }
