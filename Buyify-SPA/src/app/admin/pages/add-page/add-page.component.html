@@ -1,10 +1,6 @@
-<!-- <app-admin-header></app-admin-header> -->
-
-<br>
-
 <div class="container">
   <h2 class="page-title">Add a page</h2>
-  <a [routerLink]="['/pages']" class="btn btn-primary">Back to all pages</a>
+  <a [routerLink]="['/admin/pages']" class="btn btn-primary">Back to all pages</a>
   <br><br>
 
   <form #addPageForm="ngForm" (ngSubmit)="addPage(addPageForm)" novalidate autocomplete="off">
@@ -29,5 +25,3 @@
     <button type="submit" class="btn btn-success">Submit</button>
   </form>
 </div>
-
-<!-- <app-admin-footer></app-admin-footer> -->

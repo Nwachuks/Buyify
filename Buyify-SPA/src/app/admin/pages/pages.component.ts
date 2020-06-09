@@ -30,7 +30,7 @@ export class PagesComponent implements OnInit {
 
   getPage(page: Page) {
     this.adminService.getPage(page);
-    this.router.navigate(['/pages/edit-page']);
+    this.router.navigate(['/admin/pages/edit-page']);
   }
 
   deletePage(page: Page) {
