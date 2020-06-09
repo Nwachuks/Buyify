@@ -32,4 +32,17 @@ export class CategoriesComponent implements OnInit {
     this.router.navigate(['/admin/categories/edit-category']);
   }
 
+  deleteCategory(category: Category) {
+    if (confirm('Do you want to delete this category?')) {
+      this.adminService.deleteCategory(category).subscribe((res) => {
+        // console.log(res);
+        this.alertify.success('Category deleted');
+      }, (error) => {
+        this.alertify.error(error.error.msg);
+      }, () => {
+        this.getCategories();
+      });
+    }
+  }
+
 }

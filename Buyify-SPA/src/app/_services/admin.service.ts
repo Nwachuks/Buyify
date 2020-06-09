@@ -65,4 +65,8 @@ export class AdminService {
     this.categorySource.next(category);
   }
 
+  deleteCategory(category) {
+    return this.http.delete(this.categoryBaseUrl + category._id);
+  }
+
 }

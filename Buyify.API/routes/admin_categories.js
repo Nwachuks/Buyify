@@ -98,12 +98,23 @@ router.post('/edit-category', [
                     if(!err) {
                         res.send(category);
                     } else {
-                        return console.log('Error in updating Page: ' + JSON.stringify(err, undefined, 2));
+                        return console.log('Error in updating Category: ' + JSON.stringify(err, undefined, 2));
                     }
                 });
             }
         });
     }
+});
+
+// Get localhost:3000/admin/pages/:id
+router.delete('/:_id', (req, res) => {
+    Category.findByIdAndRemove(req.params._id, (err, category) => {
+        if (!err) {
+            res.send(category);
+        } else {
+            return console.log('Error in deleting Category: ' + JSON.stringify(err, undefined, 2));
+        }
+    });
 });
 
 module.exports = router;

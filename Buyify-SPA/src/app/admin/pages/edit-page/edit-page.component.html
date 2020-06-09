@@ -26,6 +26,6 @@
     </div>
 
     <input type="hidden" [(ngModel)]="page._id" name="_id">
-    <button type="submit" class="btn btn-success">Submit</button>
+    <button type="submit" class="btn btn-success" [disabled]="editPageForm.invalid">Submit</button>
   </form>
 </div>
