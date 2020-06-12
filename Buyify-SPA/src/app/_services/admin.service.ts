@@ -11,6 +11,7 @@ import { Category } from '../_models/category.model';
 export class AdminService {
   pageBaseUrl = environment.adminApiUrl + 'pages/';
   categoryBaseUrl = environment.adminApiUrl + 'categories/';
+  productBaseUrl = environment.adminApiUrl + 'products/';
 
   private pageSource = new BehaviorSubject<Page>({
     _id: 'id',
@@ -67,6 +68,10 @@ export class AdminService {
 
   deleteCategory(category) {
     return this.http.delete(this.categoryBaseUrl + category._id);
+  }
+
+  getAllProducts() {
+    return this.http.get(this.productBaseUrl);
   }
 
 }

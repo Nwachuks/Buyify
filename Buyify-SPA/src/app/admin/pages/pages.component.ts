@@ -24,7 +24,7 @@ export class PagesComponent implements OnInit {
     this.adminService.getAllPages().subscribe((pages) => {
       this.pages = pages as Page[];
     }, (error) => {
-      this.alertify.error(error);
+      this.alertify.error(error.error.msg);
     });
   }
 

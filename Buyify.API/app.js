@@ -5,6 +5,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const { check, validationResult } = require('express-validator');
+const fileUpload = require('express-fileupload');
 
 // Connect to db
 mongoose.connect(config.database, { useNewUrlParser: true, useFindAndModify: false, useUnifiedTopology: true });
@@ -19,6 +20,9 @@ const app = express();
 
 // Enable cors
 app.use(cors({ origin: 'http://localhost:4200' }));
+
+// Express file upload middleware
+app.use(fileUpload());
 
 // Body Parser middleware
 // parse application/x-www-form-urlencoded
@@ -40,6 +44,9 @@ app.use('/admin/pages', adminPages);
 
 const adminCategories = require('./routes/admin_categories');
 app.use('/admin/categories', adminCategories);
+
+const adminProducts = require('./routes/admin_products.js');
+app.use('/admin/products', adminProducts);
 
 const pages = require('./routes/pages');
 app.use('/', pages);

@@ -9,6 +9,7 @@ import { EditPageComponent } from './pages/edit-page/edit-page.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { AddCategoryComponent } from './categories/add-category/add-category.component';
 import { EditCategoryComponent } from './categories/edit-category/edit-category.component';
+import { ProductsComponent } from './products/products.component';
 
 import { AlertifyService } from './../_services/alertify.service';
 
@@ -21,6 +22,7 @@ const adminRoutes: Routes = [
   { path: 'admin/categories', component: CategoriesComponent},
   { path: 'admin/categories/add-category', component: AddCategoryComponent },
   { path: 'admin/categories/edit-category', component: EditCategoryComponent },
+  { path: 'admin/products', component: ProductsComponent },
   { path: '**', redirectTo: 'admin/pages', pathMatch: 'full' }
 ];
 
@@ -31,7 +33,8 @@ const adminRoutes: Routes = [
     EditPageComponent,
     CategoriesComponent,
     AddCategoryComponent,
-    EditCategoryComponent
+    EditCategoryComponent,
+    ProductsComponent
   ],
   imports: [
     CommonModule,
