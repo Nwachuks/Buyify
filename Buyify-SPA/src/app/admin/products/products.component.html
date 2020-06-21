@@ -20,9 +20,9 @@
           <td>{{ product.title }}</td>
           <td>{{ product.price | number }}</td>
           <td>{{ product.category }}</td>
-          <td *ngIf="product.image == ''"><img src="../../../assets/no-image.png" alt="No product image"></td>
-          <td *ngIf="product.image != ''"><img src="../../../assets/product_images/{{ product._id}}/{{ product.image }}"
-            alt="Product image"></td>
+          <td *ngIf="!product.image"><img src="../../../assets/no_image.png" alt="No product image"></td>
+          <!-- <td *ngIf="product.image != ''"><img src="../../../assets/product_images/{{ product._id}}/{{ product.image }}"
+            alt="Product image"></td> -->
             <!-- <td class="btn btn-primary" (click)="getPage(page)">Edit</td> -->
           <!-- <td class="btn btn-danger float-lg-right" (click)="deletePage(page)">Delete</td> -->
         </tr>

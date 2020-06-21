@@ -32,4 +32,67 @@ router.get('/', (req, res) => {
     });
 });
 
+// Post localhost:3000/admin/products/add-products
+router.post('/add-product', [
+    check('title', 'Title is required').not().isEmpty(),
+    check('description', 'Description is required').not().isEmpty(),
+    check('price', 'Price must be specified').isDecimal()
+], (req, res) => {
+    title = req.body.title;
+    slug = title.replace(/\s+/g, '-').toLowerCase();
+    description = req.body.description;
+    price = req.body.price;
+    image = req.body.image;
+    cat_slug = req.body.category;
+    Category.findOne({slug: cat_slug}, (err, cat) => {
+        if (cat) {
+            catID = cat._id;
+            category = cat.title
+        } else {
+            res.status.send(400).send({
+                message: 'Could not find category'
+            });
+        }
+    });
+
+    const errors = validationResult(req);
+
+    if(!errors.isEmpty()){
+        return res.status(400).send({
+            message: errors.errors[0].msg
+        });
+    } else {
+        // Check if product exists
+        Product.findOne({slug: slug}, (err, product) => {
+            if (product) {
+                return res.status(400).send({
+                    message: 'Product title already exists, please choose another.'
+                });
+            } else {
+                const product = new Product({
+                    title: title,
+                    slug: slug,
+                    description: description,
+                    price: price,
+                    image: image,
+                    cat_id: catID,
+                    category: category
+                });
+
+                product.save().then((result) => {
+                    Category.findOne({slug: cat_slug}, (err, category) => {
+                        if (category) {
+                            category.products.push(product);
+                            category.save();
+                            res.send(result);
+                        }
+                    });
+                }).catch(error => {
+                    return console.log('Error in saving Products: ' + JSON.stringify(error, undefined, 2));
+                });
+            }
+        });
+    }
+});
+
 module.exports = router;

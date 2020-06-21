@@ -74,4 +74,8 @@ export class AdminService {
     return this.http.get(this.productBaseUrl);
   }
 
+  postAddProduct(product) {
+    return this.http.post(this.productBaseUrl + 'add-product', product);
+  }
+
 }

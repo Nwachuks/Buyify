@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 
+import { AlertifyService } from './../_services/alertify.service';
+
 import { PagesComponent } from './pages/pages.component';
 import { AddPageComponent } from './pages/add-page/add-page.component';
 import { EditPageComponent } from './pages/edit-page/edit-page.component';
@@ -10,8 +12,7 @@ import { CategoriesComponent } from './categories/categories.component';
 import { AddCategoryComponent } from './categories/add-category/add-category.component';
 import { EditCategoryComponent } from './categories/edit-category/edit-category.component';
 import { ProductsComponent } from './products/products.component';
-
-import { AlertifyService } from './../_services/alertify.service';
+import { AddProductComponent } from './products/add-product/add-product.component';
 
 const adminRoutes: Routes = [
   // { path: '', redirectTo: 'pages', pathMatch: 'full' },
@@ -23,6 +24,7 @@ const adminRoutes: Routes = [
   { path: 'admin/categories/add-category', component: AddCategoryComponent },
   { path: 'admin/categories/edit-category', component: EditCategoryComponent },
   { path: 'admin/products', component: ProductsComponent },
+  { path: 'admin/products/add-product', component: AddProductComponent },
   { path: '**', redirectTo: 'admin/pages', pathMatch: 'full' }
 ];
 
@@ -34,7 +36,8 @@ const adminRoutes: Routes = [
     CategoriesComponent,
     AddCategoryComponent,
     EditCategoryComponent,
-    ProductsComponent
+    ProductsComponent,
+    AddProductComponent
   ],
   imports: [
     CommonModule,
